@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database name="grapevine" defaultIdMethod="native">
+	<table name="conclusion" phpName="Conclusion">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<!-- one-to-many source -->
+		<!-- one-to-many note -->
+	</table>
 	<table name="person" phpName="Person">
 		<behavior name="concrete_inheritance">
 			<parameter name="extends" value="conclusion">
