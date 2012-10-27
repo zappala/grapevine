@@ -27,6 +27,20 @@
 			<reference local="source_id" foreign="id" />
 		</foreign-key>
 	</table>
+	<table name="source" phpName="Source">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="conclustion_id" type="integer" required="true" />
+		<column name="title" type="varchar" size="255" required="true" />
+		<column name="citation" type="varchar" size="255" required="true" />
+		<!-- one-to-many -->
+		<foreign-key foreignTable="conclusion" onDelete="cascade">
+			<reference local="conclusion_id" foreign="id" />
+		</foreign-key>
+		<!-- one-to-one -->
+		<foreign-key foreignTable="attribution" onDelete="cascade">
+			<reference local="attribution_id" foreign="id" />
+		</foreign-key>
+	</table>
 	<table name="person" phpName="Person">
 		<behavior name="concrete_inheritance">
 			<parameter name="extends" value="conclusion">
