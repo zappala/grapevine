@@ -6,9 +6,10 @@
 		</behavior>
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="living" type="boolean" required="false" />
-		<!-- one-to-many identifiers -->
-		<!-- one-to-many names -->
-		<!-- one-to-many facts -->
+		<column name="gender" type="enum" valueSet="Male, Female, Unknown" required="false" />
+		<!-- one-to-many identifier -->
+		<!-- one-to-many name -->
+		<!-- one-to-many fact -->
 		<!-- one-to-many attribution -->
 	</table>
-
+</database>
