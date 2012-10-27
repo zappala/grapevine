@@ -18,6 +18,14 @@
 	<table name="note" phpName="Note">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="text" type="text" required="true" />
+		<column name="conclusion_id" type="integer" required="false" />
+		<column name="source_id" type="integer" required="false" />
+		<foreign-key foreignTable="conclusion" onDelete="cascade">
+			<reference local="conclusion_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="source" onDelete="cascade">
+			<reference local="source_id" foreign="id" />
+		</foreign-key>
 	</table>
 	<table name="person" phpName="Person">
 		<behavior name="concrete_inheritance">
