@@ -18,7 +18,7 @@
 
 	<table name="note" phpName="Note">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
-		<column name="text" type="text" required="true" />
+		<column name="text" type="longvarchar" required="true" />
 		<column name="conclusion_id" type="integer" required="false" />
 		<column name="source_id" type="integer" required="false" />
 		<foreign-key foreignTable="conclusion" onDelete="cascade">
@@ -72,7 +72,7 @@
 		<column name="name" type="varchar" size="255" required="true" />
 		<column name="email" type="varchar" size="255" required="true" />
 		<column name="phone" type="varchar" size="20" required="true" />
-		<column name="address" type="text" required="true" />
+		<column name="address" type="longvarchar" required="true" />
 		<!--
 		many-to-one:
 			attribution
@@ -81,7 +81,7 @@
 
 	<table name="person" phpName="Person">
 		<behavior name="concrete_inheritance">
-			<parameter name="extends" value="conclusion">
+			<parameter name="extends" value="conclusion" />
 		</behavior>
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="living" type="boolean" required="false" />
@@ -119,7 +119,7 @@
 	<table name="event" phpName="Event">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="date" type="timestamp" required="false" />
-		<column name="place" type="text" required="false" />
+		<column name="place" type="longvarchar" required="false" />
 		<column name="type" type="enum" 
 			valueSet="	Adoption, 
 						AdultChristening,
@@ -165,7 +165,7 @@
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="event_id" type="integer" required="true" />
 		<column name="person_id" type="integer" required="true" />
-		<column name="details" type="text" required="false" />
+		<column name="details" type="longvarchar" required="false" />
 		<column name="type" type="enum" valueSet="Principal, Participant, Official, Witness" required="true" />
 		<!-- one-to-many -->
 		<foreign-key foreignTable="event" onDelete="cascade">
@@ -181,8 +181,8 @@
 		<column name="source_id" type="integer" required="true" />
 		<column name="url" type="varchar" size="255" required="false" />
 		<column name="title" type="varchar" size="255" required="false" />
-		<column name="description" type="text" required="false" />
-		<column name="transcription" type="text" required="false" />
+		<column name="description" type="longvarchar" required="false" />
+		<column name="transcription" type="longvarchar" required="false" />
 		<foreign-key foreignTable="source" onDelete="cascade">
 			<reference local="source_id" foreign="id" />
 		</foreign-key>
@@ -193,7 +193,7 @@
 		<column name="person_id" type="integer" required="true" />
 		<column name="url" type="varchar" size="255" required="false" />
 		<column name="title" type="varchar" size="255" required="false" />
-		<column name="description" type="text" required="false" />
+		<column name="description" type="longvarchar" required="false" />
 		<foreign-key foreignTable="person" onDelete="cascade">
 			<reference local="person_id" foreign="id" />
 		</foreign-key>
