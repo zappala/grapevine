@@ -47,9 +47,27 @@
 
 	<table name="attribution" phpName="Attribution">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="agent_id" type="integer" required="true" />
 		<column name="contributor_id" type="integer" required="true" />
 		<column name="modified" type="timestamp" required="true" />
 		<column name="changeMessage" type="varchar" size="255" required="true" />
+		<!-- one-to-many -->
+		<foreign-key foreignTable="agent" onDelete="cascade">
+			<reference local="agent_id" foreign="id" />
+		</foreign-key>
+
+	</table>
+
+	<table name="agent" phpName="Agent">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="name" type="varchar" size="255" required="true" />
+		<column name="email" type="varchar" size="255" required="true" />
+		<column name="phone" type="varchar" size="20" required="true" />
+		<column name="address" type="text" required="true" />
+		<!--
+		many-to-one:
+			attribution
+		-->
 	</table>
 
 	<table name="person" phpName="Person">
