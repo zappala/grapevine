@@ -31,8 +31,8 @@
 	</table>
 
 	<table name="source" phpName="Source">
-		<column name="id" type="integer" required="true" primaryKey="true" />
-		<column name="conclustion_id" type="integer" required="true" />
+		<column name="attribution_id" type="integer" required="true" primaryKey="true" />
+		<column name="conclusion_id" type="integer" required="true" />
 		<column name="title" type="varchar" size="255" required="true" />
 		<column name="citation" type="varchar" size="255" required="true" />
 		<!-- one-to-many -->
@@ -55,7 +55,12 @@
 		<foreign-key foreignTable="agent" onDelete="cascade">
 			<reference local="agent_id" foreign="id" />
 		</foreign-key>
-
+		<!-- one-to-one:
+			source
+			event
+			relationship
+			person
+		-->
 	</table>
 
 	<table name="agent" phpName="Agent">
@@ -78,7 +83,7 @@
 		<column name="living" type="boolean" required="false" />
 		<column name="gender" type="enum" valueSet="Male, Female, Unknown" required="false" />
 		<!--
-		one-to-many 
+		one-to-many: 
 			identifier
 			name
 			fact
@@ -86,4 +91,77 @@
 		-->
 	</table>
 
+	<table name="relationship" phpName="Relationship">
+		<column name="attribution_id" type="integer" required="true" primaryKey="true" />
+		<column name="type" type="enum" valueSet="Couple, ParentChild" required="true" />
+		<column name="person1_id" type="integer" required="true" />
+		<column name="person2_id" type="integer" required="true" />
+		<foreign-key foreignTable="attribution" onDelete="cascade">
+			<reference local="attribution_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+	<table name="event" phpName="Event">
+		<column name="attribution_id" type="integer" required="true" primaryKey="true" />
+		<column name="date" type="timestamp" required="false" />
+		<column name="place" type="text" required="false" />
+		<column name="type" type="enum" 
+			valueSet="	Adoption, 
+						AdultChristening,
+						Annulment,
+						Baptism,
+						BarMitzvah,
+						BatMitzvah,
+						Birth,
+						Blessing,
+						Burial,
+						Census,
+						Christening,
+						Cicumcision,
+						Confirmation,
+						Cremation,
+						Death,
+						Divorce,
+						Education,
+						Engagement,
+						Emigration,
+						Excommunication,
+						FirstCommunion,
+						Funeral,
+						Immigration,
+						LandTransaction,
+						Marriage,
+						MilitaryAward,
+						MilitaryDischarge,
+						Mission,
+						MoveFrom,
+						MoveTo,
+						Naturalization,
+						Ordination,
+						Retirement" 
+			required="true" />
+		<foreign-key foreignTable="attribution" onDelete="cascade">
+			<reference local="attribution_id" foreign="id" />
+		</foreign-key>
+		<!--
+		one-to-many:
+			roles
+		-->
+	</table>
+
+	<table name="role" phpName="Role">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="event_id" type="integer" required="true" />
+		<column name="person_id" type="integer" required="true" />
+		<column name="details" type="text" required="false" />
+		<column name="type" type="enum" valueSet="Principal, Participant, Official, Witness" required="true" />
+		<!-- one-to-many -->
+		<foreign-key foreignTable="event" onDelete="cascade">
+			<reference local="event_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="person" onDelete="cascade">
+			<reference local="person_id" foreign="id" />
+		</foreign-key>
+		
+	</table>
 </database>
