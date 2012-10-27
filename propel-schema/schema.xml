@@ -2,8 +2,22 @@
 <database name="grapevine" defaultIdMethod="native">
 	<table name="conclusion" phpName="Conclusion">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
-		<!-- one-to-many source -->
-		<!-- one-to-many note -->
+		<!-- 
+		one-to-many:
+			source
+			note
+		extended by:
+			person
+			relationship
+			event rote
+			event
+			fact
+			name
+		-->
+	</table>
+	<table name="note" phpName="Note">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="text" type="text" required="true" />
 	</table>
 	<table name="person" phpName="Person">
 		<behavior name="concrete_inheritance">
@@ -12,9 +26,12 @@
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="living" type="boolean" required="false" />
 		<column name="gender" type="enum" valueSet="Male, Female, Unknown" required="false" />
-		<!-- one-to-many identifier -->
-		<!-- one-to-many name -->
-		<!-- one-to-many fact -->
-		<!-- one-to-many attribution -->
+		<!--
+		one-to-many 
+			identifier
+			name
+			fact
+			attribution
+		-->
 	</table>
 </database>
