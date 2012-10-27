@@ -30,7 +30,7 @@
 	</table>
 
 	<table name="source" phpName="Source">
-		<column name="attribution_id" type="integer" required="true" primaryKey="true" />
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="conclusion_id" type="integer" required="true" />
 		<column name="title" type="varchar" size="255" required="true" />
 		<column name="citation" type="varchar" size="255" required="true" />
@@ -38,28 +38,33 @@
 		<foreign-key foreignTable="conclusion" onDelete="cascade">
 			<reference local="conclusion_id" foreign="id" />
 		</foreign-key>
-		<!-- one-to-one -->
-		<foreign-key foreignTable="attribution" onDelete="cascade">
-			<reference local="attribution_id" foreign="id" />
-		</foreign-key>
 	</table>
 
 	<table name="attribution" phpName="Attribution">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="agent_id" type="integer" required="true" />
-		<column name="contributor_id" type="integer" required="true" />
+		<column name="source_id" type="integer" required="true" />
+		<column name="event_id" type="integer" required="true" />
+		<column name="relationship_id" type="integer" required="true" />
+		<column name="person_id" type="integer" required="true" />
 		<column name="modified" type="timestamp" required="true" />
 		<column name="changeMessage" type="varchar" size="255" required="true" />
 		<!-- one-to-many -->
 		<foreign-key foreignTable="agent" onDelete="cascade">
 			<reference local="agent_id" foreign="id" />
 		</foreign-key>
-		<!-- one-to-one:
-			source
-			event
-			relationship
-			person
-		-->
+		<foreign-key foreignTable="source" onDelete="cascade">
+			<reference local="source_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="event" onDelete="cascade">
+			<reference local="event_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="relationship" onDelete="cascade">
+			<reference local="relationship_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="person" onDelete="cascade">
+			<reference local="person_id" foreign="id" />
+		</foreign-key>
 	</table>
 
 	<table name="agent" phpName="Agent">
@@ -105,17 +110,14 @@
 	</table>
 
 	<table name="relationship" phpName="Relationship">
-		<column name="attribution_id" type="integer" required="true" primaryKey="true" />
+		<column name="id" type="integer" required="true" primaryKey="true" />
 		<column name="type" type="enum" valueSet="Couple, ParentChild" required="true" />
 		<column name="person1_id" type="integer" required="true" />
 		<column name="person2_id" type="integer" required="true" />
-		<foreign-key foreignTable="attribution" onDelete="cascade">
-			<reference local="attribution_id" foreign="id" />
-		</foreign-key>
 	</table>
 
 	<table name="event" phpName="Event">
-		<column name="attribution_id" type="integer" required="true" primaryKey="true" />
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="date" type="timestamp" required="false" />
 		<column name="place" type="text" required="false" />
 		<column name="type" type="enum" 
@@ -153,9 +155,6 @@
 						Ordination,
 						Retirement" 
 			required="true" />
-		<foreign-key foreignTable="attribution" onDelete="cascade">
-			<reference local="attribution_id" foreign="id" />
-		</foreign-key>
 		<!--
 		one-to-many:
 			roles
