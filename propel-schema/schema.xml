@@ -12,7 +12,6 @@
 			relationship
 			event rote
 			event
-			fact
 			name
 		-->
 	</table>
@@ -84,11 +83,25 @@
 		<column name="gender" type="enum" valueSet="Male, Female, Unknown" required="false" />
 		<!--
 		one-to-many: 
-			identifier
 			name
-			fact
 			attribution
 		-->
+	</table>
+	
+	<table name="name" phpName="Name">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="type" type="enum" 
+			valueSet="	BirthName,
+						DeathName,
+						MarriedName,
+						AlsoKnownAs,
+						Nickname,
+						AdoptiveName,
+						FormalName,
+						ReligiousName" 
+			required="false" />
+		<column name="preferred" type="boolean" required="false" />
+		<column name="name" type="varchar" size="255" required="true" />
 	</table>
 
 	<table name="relationship" phpName="Relationship">
@@ -162,6 +175,6 @@
 		<foreign-key foreignTable="person" onDelete="cascade">
 			<reference local="person_id" foreign="id" />
 		</foreign-key>
-		
 	</table>
+
 </database>
