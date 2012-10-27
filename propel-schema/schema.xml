@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database name="grapevine" defaultIdMethod="native">
+
 	<table name="conclusion" phpName="Conclusion">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<!-- 
@@ -15,6 +16,7 @@
 			name
 		-->
 	</table>
+
 	<table name="note" phpName="Note">
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="text" type="text" required="true" />
@@ -27,6 +29,7 @@
 			<reference local="source_id" foreign="id" />
 		</foreign-key>
 	</table>
+
 	<table name="source" phpName="Source">
 		<column name="id" type="integer" required="true" primaryKey="true" />
 		<column name="conclustion_id" type="integer" required="true" />
@@ -41,6 +44,14 @@
 			<reference local="attribution_id" foreign="id" />
 		</foreign-key>
 	</table>
+
+	<table name="attribution" phpName="Attribution">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="contributor_id" type="integer" required="true" />
+		<column name="modified" type="timestamp" required="true" />
+		<column name="changeMessage" type="varchar" size="255" required="true" />
+	</table>
+
 	<table name="person" phpName="Person">
 		<behavior name="concrete_inheritance">
 			<parameter name="extends" value="conclusion">
@@ -56,4 +67,5 @@
 			attribution
 		-->
 	</table>
+
 </database>
