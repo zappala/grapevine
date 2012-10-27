@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="grapevine" defaultIdMethod="native">
+	<table name="person" phpName="Person">
+		<behavior name="concrete_inheritance">
+			<parameter name="extends" value="conclusion">
+		</behavior>
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="living" type="boolean" required="false" />
+		<!-- one-to-many identifiers -->
+		<!-- one-to-many names -->
+		<!-- one-to-many facts -->
+		<!-- one-to-many attribution -->
+	</table>
+
