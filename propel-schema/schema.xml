@@ -176,4 +176,27 @@
 		</foreign-key>
 	</table>
 
+	<table name="document" phpName="Document">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="source_id" type="integer" required="true" />
+		<column name="url" type="varchar" size="255" required="false" />
+		<column name="title" type="varchar" size="255" required="false" />
+		<column name="description" type="text" required="false" />
+		<column name="transcription" type="text" required="false" />
+		<foreign-key foreignTable="source" onDelete="cascade">
+			<reference local="source_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+	<table name="photo" phpName="Photo">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="person_id" type="integer" required="true" />
+		<column name="url" type="varchar" size="255" required="false" />
+		<column name="title" type="varchar" size="255" required="false" />
+		<column name="description" type="text" required="false" />
+		<foreign-key foreignTable="person" onDelete="cascade">
+			<reference local="person_id" foreign="id" />
+		</foreign-key>
+	</table>
+
 </database>
