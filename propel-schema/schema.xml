@@ -10,7 +10,7 @@
 		extended by:
 			person
 			relationship
-			event rote
+			event role
 			event
 			name
 		-->
@@ -94,6 +94,9 @@
 	</table>
 	
 	<table name="name" phpName="Name">
+		<behavior name="concrete_inheritance">
+			<parameter name="extends" value="conclusion" />
+		</behavior>
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="type" type="enum" 
 			valueSet="	BirthName,
@@ -110,6 +113,9 @@
 	</table>
 
 	<table name="relationship" phpName="Relationship">
+		<behavior name="concrete_inheritance">
+			<parameter name="extends" value="conclusion" />
+		</behavior>
 		<column name="id" type="integer" required="true" primaryKey="true" />
 		<column name="type" type="enum" valueSet="Couple, ParentChild" required="true" />
 		<column name="person1_id" type="integer" required="true" />
@@ -117,6 +123,9 @@
 	</table>
 
 	<table name="event" phpName="Event">
+		<behavior name="concrete_inheritance">
+			<parameter name="extends" value="conclusion" />
+		</behavior>
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="date" type="timestamp" required="false" />
 		<column name="place" type="longvarchar" required="false" />
@@ -162,6 +171,9 @@
 	</table>
 
 	<table name="role" phpName="Role">
+		<behavior name="concrete_inheritance">
+			<parameter name="extends" value="conclusion" />
+		</behavior>
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<column name="event_id" type="integer" required="true" />
 		<column name="person_id" type="integer" required="true" />
