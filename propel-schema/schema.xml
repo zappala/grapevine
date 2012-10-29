@@ -110,7 +110,7 @@
 						ReligiousName" 
 			required="false" />
 		<column name="preferred" type="boolean" required="false" />
-		<column name="name" type="varchar" size="255" required="true" />
+		<column name="value" type="varchar" size="255" required="true" />
 	</table>
 
 	<table name="relationship" phpName="Relationship">
