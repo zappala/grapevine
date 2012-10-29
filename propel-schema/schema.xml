@@ -2,6 +2,7 @@
 <database name="grapevine" defaultIdMethod="native">
 
 	<table name="conclusion" phpName="Conclusion">
+		<behavior name="versionable" />
 		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
 		<!-- 
 		one-to-many:
